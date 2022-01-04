@@ -74,8 +74,8 @@ it("returns a 201 with valid inputs", async () => {
     .post("/api/payments")
     .set("Cookie", global.signin(userId))
     .send({
-      token: "tok_visa",
       orderId: order.id,
+      token: "tok_visa",
     })
     .expect(201);
 
