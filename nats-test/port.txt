@@ -1,0 +1,3 @@
+localhost:4222
+localhost:8222/streaming
+http://localhost:8222/streaming/channelsz?subs=1
