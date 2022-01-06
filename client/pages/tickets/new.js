@@ -5,21 +5,23 @@ import useRequest from "../../hooks/use-request";
 import TicketForm from "../../components/form/ticketForm/TicketForm";
 
 const NewTicket = () => {
-  const [values, setValues] = useState({
-    title: "",
-    price: "",
-  });
+  const [title, setTitle] = useState("");
+  const [price, setPrice] = useState("");
+  // const [values, setValues] = useState({
+  //   title: "",
+  //   price: "",
+  // });
   const { doRequest, errors } = useRequest({
     url: "/api/tickets",
     method: "post",
     body: {
-      title: values.title,
-      price: values.price,
+      title,
+      price,
     },
     onSuccess: () => Router.push("/"),
   });
 
-  console.log(values.price, values.title);
+  console.log(price, title);
 
   const onSubmit = async (event) => {
     console.log("submit");
@@ -28,38 +30,16 @@ const NewTicket = () => {
     await doRequest();
   };
 
-  const onBlur = () => {
-    const value = parseFloat(price);
-
-    if (isNaN(value)) {
-      return;
-    }
-
-    setPrice(value.toFixed(2));
-  };
-
   return (
     <div>
       <h1>Create a Ticket</h1>
       <form onSubmit={onSubmit}>
-        {/* <div className="form-group pt-3">
-          <label>Title</label>
-          <input
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="form-control "
-          />
-        </div>
-        <div className="form-group pt-3">
-          <label>Price</label>
-          <input
-            value={price}
-            onBlur={onBlur}
-            onChange={(e) => setPrice(e.target.value)}
-            className="form-control"
-          />
-        </div> */}
-        <TicketForm values={values} setValues={setValues} />
+        <TicketForm
+          title={title}
+          setTitle={setTitle}
+          setPrice={setPrice}
+          price={price}
+        />
         <div className="pt-3">{errors}</div>
         <Button
           onClick={onSubmit}
