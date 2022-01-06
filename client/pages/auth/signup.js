@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Router from "next/router";
 import Button from "@mui/material/Button";
 import useRequest from "../../hooks/use-request";
-import Form from "../../components/form/Form";
+import Form from "../../components/form/authForm/Form";
 const SignUp = () => {
   const [values, setValues] = useState({
     password: "",

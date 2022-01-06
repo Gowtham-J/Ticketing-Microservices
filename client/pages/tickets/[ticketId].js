@@ -1,5 +1,6 @@
 import Router from "next/router";
 import useRequest from "../../hooks/use-request";
+import Button from "@mui/material/Button";
 import TicketPaper from "../../components/Paper/TicketPaper";
 
 const TicketShow = ({ ticket }) => {
@@ -17,10 +18,19 @@ const TicketShow = ({ ticket }) => {
     <div>
       <h1>{ticket.title}</h1>
       <h4>Price: {ticket.price}</h4>
-      <button onClick={() => doRequest()} className="btn btn-primary">
+      {/* <button onClick={() => doRequest()} className="btn btn-primary">
         Purchase
-      </button>
-      <TicketPaper ticket={ticket} doRequest={doRequest} />
+      </button> */}
+      <Button
+        onClick={() => doRequest()}
+        variant="contained"
+        // sx={{ marginLeft: "5px" }}
+        color="info"
+        a
+      >
+        Purchase
+      </Button>
+      {/* <TicketPaper ticket={ticket} doRequest={doRequest} /> */}
       {errors}
     </div>
   );

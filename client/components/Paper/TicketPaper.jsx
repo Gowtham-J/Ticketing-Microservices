@@ -11,12 +11,22 @@ export default function TicketPaper({ ticket, doRequest }) {
         flexWrap: "wrap",
         "& > :not(style)": {
           m: 1,
-          minWidth: 150,
-          minHeight: 150,
+          minWidth: 200,
+          minHeight: 200,
         },
       }}
     >
-      <Paper sx={{ minWidth: 150, minHeight: 150, padding: 1 }} elevation={3}>
+      <Paper
+        sx={{
+          minWidth: 150,
+          minHeight: 150,
+          padding: 1,
+          display: "flex",
+          flexWrap: "wrap",
+          flexDirection: "column",
+        }}
+        elevation={3}
+      >
         <h1>{ticket.title}</h1>
         <h4>Price: {ticket.price}</h4>
 
@@ -25,6 +35,7 @@ export default function TicketPaper({ ticket, doRequest }) {
           variant="contained"
           sx={{ marginLeft: "5px" }}
           color="info"
+          a
         >
           Purchase
         </Button>

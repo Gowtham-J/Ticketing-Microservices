@@ -1,24 +1,31 @@
 import { useState } from "react";
-import useRequest from "../../hooks/use-request";
+import Button from "@mui/material/Button";
 import Router from "next/router";
+import useRequest from "../../hooks/use-request";
+import TicketForm from "../../components/form/ticketForm/TicketForm";
 
 const NewTicket = () => {
-  const [title, setTitle] = useState("");
-  const [price, setPrice] = useState("");
+  const [values, setValues] = useState({
+    title: "",
+    price: "",
+  });
   const { doRequest, errors } = useRequest({
     url: "/api/tickets",
     method: "post",
     body: {
-      title,
-      price,
+      title: values.title,
+      price: values.price,
     },
     onSuccess: () => Router.push("/"),
   });
 
-  const onSubmit = (event) => {
+  console.log(values.price, values.title);
+
+  const onSubmit = async (event) => {
+    console.log("submit");
     event.preventDefault();
 
-    doRequest();
+    await doRequest();
   };
 
   const onBlur = () => {
@@ -35,7 +42,7 @@ const NewTicket = () => {
     <div>
       <h1>Create a Ticket</h1>
       <form onSubmit={onSubmit}>
-        <div className="form-group pt-3">
+        {/* <div className="form-group pt-3">
           <label>Title</label>
           <input
             value={title}
@@ -51,9 +58,18 @@ const NewTicket = () => {
             onChange={(e) => setPrice(e.target.value)}
             className="form-control"
           />
-        </div>
+        </div> */}
+        <TicketForm values={values} setValues={setValues} />
         <div className="pt-3">{errors}</div>
-        <button className=" btn btn-primary">Submit</button>
+        <Button
+          onClick={onSubmit}
+          variant="contained"
+          sx={{ marginLeft: "5px" }}
+          color="info"
+        >
+          Submit
+        </Button>
+        <button className="btn btn-sm">submit</button>
       </form>
     </div>
   );
