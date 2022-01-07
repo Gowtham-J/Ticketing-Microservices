@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import StripeCheckout from "react-stripe-checkout";
 import Router from "next/router";
+import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";
 import useRequest from "../../hooks/use-request";
 
 const OrderShow = ({ order, currentUser }) => {
@@ -30,7 +31,11 @@ const OrderShow = ({ order, currentUser }) => {
   }, [order]);
 
   if (timeLeft < 0) {
-    return <div>Order Expired</div>;
+    return (
+      <h1>
+        <ProductionQuantityLimitsIcon /> Order Expired
+      </h1>
+    );
   }
 
   return (

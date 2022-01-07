@@ -7,10 +7,7 @@ import TicketForm from "../../components/form/ticketForm/TicketForm";
 const NewTicket = () => {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
-  // const [values, setValues] = useState({
-  //   title: "",
-  //   price: "",
-  // });
+
   const { doRequest, errors } = useRequest({
     url: "/api/tickets",
     method: "post",
@@ -32,7 +29,7 @@ const NewTicket = () => {
 
   return (
     <div>
-      <h1>Create a Ticket</h1>
+      <h1>Create an event</h1>
       <form onSubmit={onSubmit}>
         <TicketForm
           title={title}
@@ -49,7 +46,6 @@ const NewTicket = () => {
         >
           Submit
         </Button>
-        <button className="btn btn-sm">submit</button>
       </form>
     </div>
   );
