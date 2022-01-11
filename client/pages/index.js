@@ -3,7 +3,7 @@ const LandingPage = ({ currentUser, tickets }) => {
   return (
     <div>
       {!currentUser ? (
-        <h1 className="intro">Microservice Ticketing App</h1>
+        <h1 className="intro">Microservice Ticketing App.</h1>
       ) : (
         <div>
           {!tickets ? (
