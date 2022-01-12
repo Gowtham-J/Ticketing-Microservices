@@ -13,6 +13,7 @@ const TicketShow = ({ ticket }) => {
     onSuccess: (order) =>
       Router.push("/orders/[orderId]", `/orders/${order.id}`),
   });
+  console.log(errors);
 
   return (
     <div>

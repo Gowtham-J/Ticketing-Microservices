@@ -25,7 +25,8 @@ spec:
             - name: NATS_CLUSTER_ID
               value: ticketing
             - name: MONGO_URI
-              value: "mongodb://orders-mongo-srv:27017/orders"
+              value: "mongodb+srv://GowthamJ:9986677227@mongocluster.9l0ki.mongodb.net/ordersDatabase?retryWrites=true&w=majority"
+              # value: "mongodb://orders-mongo-srv:27017/orders"
             - name: JWT_KEY
               valueFrom:
                 secretKeyRef:
