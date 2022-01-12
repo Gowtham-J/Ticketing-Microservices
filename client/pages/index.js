@@ -7,7 +7,7 @@ const LandingPage = ({ currentUser, tickets }) => {
       ) : (
         <div>
           {!tickets ? (
-            <h1>There are no Tickets available yet</h1>
+            <h1>There are no Tickets available yet.</h1>
           ) : (
             <h1>Tickets Available</h1>
           )}
