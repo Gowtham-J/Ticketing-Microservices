@@ -15,14 +15,37 @@ router.post(
     body("price")
       .isFloat({ gt: 0 })
       .withMessage("Price must be greater than zero"),
+    body("address").not().isEmpty().withMessage("Address is required"),
+    body("duration").not().isEmpty().withMessage("Duration is required"),
+    body("city").not().isEmpty().withMessage("City is required"),
+    body("state").not().isEmpty().withMessage("State is required"),
+    body("country").not().isEmpty().withMessage("Country is required"),
+    body("image").not().isEmpty().withMessage("Image is required"),
   ],
   validateRequest,
   async (req: Request, res: Response) => {
-    const { title, price } = req.body;
+    const {
+      title,
+      price,
+      address,
+      duration,
+      description,
+      city,
+      state,
+      country,
+      image,
+    } = req.body;
 
     const ticket = Ticket.build({
       title,
       price,
+      description,
+      address,
+      duration,
+      city,
+      state,
+      country,
+      image,
       userId: req.currentUser!.id,
     });
     await ticket.save();
@@ -30,6 +53,9 @@ router.post(
       id: ticket.id,
       title: ticket.title,
       price: ticket.price,
+      // address: ticket,
+      // duration: ticket.duration,
+      // city: ticket.city,
       userId: ticket.userId,
       version: ticket.version,
     });
