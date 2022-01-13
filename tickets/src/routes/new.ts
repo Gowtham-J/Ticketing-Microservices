@@ -53,11 +53,11 @@ router.post(
       id: ticket.id,
       title: ticket.title,
       price: ticket.price,
-      // address: ticket,
-      // duration: ticket.duration,
-      // city: ticket.city,
       userId: ticket.userId,
       version: ticket.version,
+      description: ticket.description,
+      city: ticket.city,
+      image: ticket.image,
     });
 
     res.status(201).send(ticket);
