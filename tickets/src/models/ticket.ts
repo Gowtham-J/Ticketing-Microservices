@@ -5,12 +5,26 @@ interface TicketAttrs {
   title: string;
   price: number;
   userId: string;
+  description: string;
+  address: string;
+  duration: string;
+  city: string;
+  state: string;
+  country: string;
+  image: string;
 }
 
 interface TicketDoc extends mongoose.Document {
   title: string;
   price: number;
   userId: string;
+  description: string;
+  address: string;
+  duration: string;
+  city: string;
+  state: string;
+  country: string;
+  image: string;
   version: number;
   orderId?: string;
 }
@@ -30,6 +44,34 @@ const ticketSchema = new mongoose.Schema(
       required: true,
     },
     userId: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: String,
+      required: true,
+    },
+    duration: {
+      type: String,
+      required: true,
+    },
+    city: {
+      type: String,
+      required: true,
+    },
+    state: {
+      type: String,
+      required: true,
+    },
+    country: {
+      type: String,
+      required: true,
+    },
+    image: {
       type: String,
       required: true,
     },
