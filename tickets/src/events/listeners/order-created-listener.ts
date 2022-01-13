@@ -29,6 +29,9 @@ export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
       orderId: ticket.orderId,
       version: ticket.version,
       userId: ticket.userId,
+      description: ticket.description,
+      city: ticket.city,
+      image: ticket.image,
     });
 
     // ack the message

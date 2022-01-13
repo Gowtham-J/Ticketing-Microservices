@@ -7,7 +7,7 @@ interface TicketAttrs {
   userId: string;
   description: string;
   address: string;
-  duration: string;
+  duration: number;
   city: string;
   state: string;
   country: string;
@@ -20,7 +20,7 @@ interface TicketDoc extends mongoose.Document {
   userId: string;
   description: string;
   address: string;
-  duration: string;
+  duration: number;
   city: string;
   state: string;
   country: string;
@@ -56,7 +56,7 @@ const ticketSchema = new mongoose.Schema(
       required: true,
     },
     duration: {
-      type: String,
+      type: Number,
       required: true,
     },
     city: {
