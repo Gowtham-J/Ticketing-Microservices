@@ -49,11 +49,19 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
-    - image: 9986677227/client
-      context: client
+    - image: 9986677227/client-react
+      context: client-react
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
           - src: "**/*.ts"
             dest: .
+    # - image: 9986677227/client
+    #   context: client
+    #   docker:
+    #     dockerfile: Dockerfile
+    #   sync:
+    #     manual:
+    #       - src: "**/*.ts"
+    #         dest: .
