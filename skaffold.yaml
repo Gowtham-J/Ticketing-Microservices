@@ -55,7 +55,7 @@ build:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: "**/*.ts"
+          - src: "src/index.js"
             dest: .
     # - image: 9986677227/client
     #   context: client
