@@ -15,6 +15,7 @@ import Regards from "./pages/Regards";
 import OrderPlace from "./pages/OrderPlace";
 import Payment from "./pages/Payment";
 import OrderRegards from "./pages/OrderRegards";
+import Orders from "./pages/orders";
 
 // ----------------------------------------------------------------------
 
@@ -27,6 +28,7 @@ export default function Router({ pageprops, currentUser }) {
         { element: <Navigate to="/dashboard/app" replace /> },
         { path: "app", element: <DashboardApp /> },
         { path: "user", element: <User /> },
+        { path: "orders", element: <Orders /> },
         { path: "products", element: <Products /> },
         { path: "products/orderPlace", element: <OrderPlace /> },
         { path: "products/payment", element: <Payment /> },
