@@ -7,6 +7,7 @@ import lockFill from "@iconify/icons-eva/lock-fill";
 import personAddFill from "@iconify/icons-eva/person-add-fill";
 import alertTriangleFill from "@iconify/icons-eva/alert-triangle-fill";
 import cloudUploadFill from "@iconify/icons-eva/cloud-upload-fill";
+import shoppingCartFill from "@iconify/icons-eva/shopping-cart-fill";
 // ----------------------------------------------------------------------
 
 const getIcon = (name) => <Icon icon={name} width={22} height={22} />;
@@ -31,6 +32,11 @@ const sidebarConfig = [
     title: "new ticket",
     path: "/dashboard/tickets",
     icon: getIcon(cloudUploadFill),
+  },
+  {
+    title: "order logs",
+    path: "/dashboard/orders",
+    icon: getIcon(shoppingCartFill),
   },
   // {
   //   title: "blog",
