@@ -1,4 +1,5 @@
 // material
+import { useState } from "react";
 import { Box, Grid, Container, Typography } from "@mui/material";
 // components
 import Page from "../components/Page";
@@ -6,16 +7,14 @@ import { useLocation } from "react-router-dom";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 // ----------------------------------------------------------------------
 
 export default function OrderPlace() {
-  const navigate = useNavigate();
-  const { state: product } = useLocation();
   const [error, setError] = useState("");
-  const [order, setOrder] = useState({});
+  const { state: product } = useLocation();
+  const navigate = useNavigate();
   console.log("we are passing through page", product);
-
+  let finalOrder = {};
   const handlePlaceOrder = () => {
     const config = { headers: { "Content-Type": "application/json" } };
     const data = JSON.stringify({
@@ -24,18 +23,18 @@ export default function OrderPlace() {
     axios
       .post("/api/orders", data, config)
       .then((res) => {
-        console.log("result", res);
-        setOrder(res);
-
-        navigate("/login", { replace: true, state: order });
+        console.log("result of order", res.data);
+        finalOrder = res.data;
+        navigate("/dashboard/products/payment", {
+          replace: true,
+          state: finalOrder,
+        });
       })
       .catch((err) => {
-        // console.log("error", err.response.data.errors[0].message);
         setError(err.response.data.errors[0].message);
-        // setResult("");
+        console.log(err.response.data.errors[0].message);
+        finalOrder = {};
       });
-
-    console.log("place it already");
   };
 
   return (

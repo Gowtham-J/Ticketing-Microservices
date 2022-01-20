@@ -4,7 +4,6 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
-import { Link as RouterLink } from "react-router-dom";
 import CardActions from "@mui/material/CardActions";
 import CardMedia from "@mui/material/CardMedia";
 import { Card, CardContent } from "@mui/material";
@@ -29,7 +28,6 @@ export default function BasicModal({ product }) {
     axios
       .get(`/api/tickets/${product.id}`)
       .then((res) => {
-        // console.log(product);
         setOpen(true);
       })
       .catch((err) => console.log(err));
