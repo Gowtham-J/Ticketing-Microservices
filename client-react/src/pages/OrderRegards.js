@@ -4,13 +4,18 @@ import { Box, Container, Typography } from "@mui/material";
 import Page from "../components/Page";
 import { Icon } from "@iconify/react";
 import checkmarkCircleFill from "@iconify/icons-eva/checkmark-circle-fill";
-
+import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 // ----------------------------------------------------------------------
 
-export default function Regards() {
+export default function OrderRegards() {
+  const navigate = useNavigate();
+  const handleDirect = () => {
+    navigate("/dashboard/orders");
+  };
   return (
     <Page
-      title="Regards | Minimal-UI"
+      title="OrderRegards | Minimal-UI"
       sx={{
         display: "flex",
         justifyContent: "center",
@@ -18,9 +23,9 @@ export default function Regards() {
       }}
     >
       <Container maxWidth="xl">
-        <Box>
+        <Box sx={{ padding: "10px 0" }}>
           <Typography variant="h2">
-            Thank you for posting.{" "}
+            Order successfully placed{" "}
             <Icon
               style={{ color: "#00AB55" }}
               icon={checkmarkCircleFill}
@@ -29,6 +34,14 @@ export default function Regards() {
             />{" "}
           </Typography>
         </Box>
+        <Button
+          variant="contained"
+          sx={{ mt: 2 }}
+          onClick={handleDirect}
+          size="medium"
+        >
+          My order logs
+        </Button>
       </Container>
     </Page>
   );

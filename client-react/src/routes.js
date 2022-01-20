@@ -14,6 +14,7 @@ import Tickets from "./pages/Ticket";
 import Regards from "./pages/Regards";
 import OrderPlace from "./pages/OrderPlace";
 import Payment from "./pages/Payment";
+import OrderRegards from "./pages/OrderRegards";
 
 // ----------------------------------------------------------------------
 
@@ -29,6 +30,7 @@ export default function Router({ pageprops, currentUser }) {
         { path: "products", element: <Products /> },
         { path: "products/orderPlace", element: <OrderPlace /> },
         { path: "products/payment", element: <Payment /> },
+        { path: "products/payment/regards", element: <OrderRegards /> },
         { path: "tickets", element: <Tickets /> },
         { path: "tickets/regards", element: <Regards /> },
         { path: "blog", element: <Blog /> },
