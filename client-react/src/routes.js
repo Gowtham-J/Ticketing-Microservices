@@ -13,6 +13,7 @@ import NotFound from "./pages/Page404";
 import Tickets from "./pages/Ticket";
 import Regards from "./pages/Regards";
 import OrderPlace from "./pages/OrderPlace";
+import Payment from "./pages/Payment";
 
 // ----------------------------------------------------------------------
 
@@ -27,6 +28,7 @@ export default function Router({ pageprops, currentUser }) {
         { path: "user", element: <User /> },
         { path: "products", element: <Products /> },
         { path: "products/orderPlace", element: <OrderPlace /> },
+        { path: "products/payment", element: <Payment /> },
         { path: "tickets", element: <Tickets /> },
         { path: "tickets/regards", element: <Regards /> },
         { path: "blog", element: <Blog /> },
