@@ -15,20 +15,10 @@ import Payment from "./pages/Payment";
 import OrderRegards from "./pages/OrderRegards";
 import Orders from "./pages/orders";
 import { useState, useEffect } from "react";
-import Cookies from "js-cookie";
+import axios from "axios";
 // ----------------------------------------------------------------------
 
-export default function Router({ pageprops, currentUser }) {
-  console.log(currentUser);
-
-  const [auth, setAuth] = useState("");
-
-  useEffect(() => {
-    setAuth(Cookies.get("express"));
-  }, [auth]);
-
-  console.log("auth", auth);
-  console.log("cookie", Cookies.get("express"));
+export default function Router({ user }) {
   return useRoutes([
     {
       path: "/dashboard",
@@ -45,6 +35,7 @@ export default function Router({ pageprops, currentUser }) {
         { path: "tickets/regards", element: <Regards /> },
       ],
     },
+
     {
       path: "/",
       element: <LogoOnlyLayout />,
