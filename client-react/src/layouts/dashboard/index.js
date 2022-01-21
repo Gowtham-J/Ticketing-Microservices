@@ -40,8 +40,7 @@ export default function DashboardLayout() {
 
   async function fetchData() {
     const response = await axios.get("/api/users/currentuser");
-    setUser(response.data);
-    console.log(response);
+    setUser(response.data.currentUser);
   }
   useEffect(() => {
     fetchData();

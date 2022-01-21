@@ -39,7 +39,11 @@ DashboardSidebar.propTypes = {
   onCloseSidebar: PropTypes.func,
 };
 
-export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
+export default function DashboardSidebar({
+  isOpenSidebar,
+  onCloseSidebar,
+  user,
+}) {
   const { pathname } = useLocation();
   useEffect(() => {
     if (isOpenSidebar) {
@@ -48,6 +52,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
+  console.log("user123", user);
   const renderContent = (
     <Scrollbar
       sx={{
@@ -70,12 +75,16 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
           <AccountStyle>
             <Avatar src={account.photoURL} alt="photoURL" />
             <Box sx={{ ml: 2 }}>
-              <Typography variant="subtitle2" sx={{ color: "text.primary" }}>
-                {account.displayName}
+              <Typography
+                variant="subtitle2"
+                sx={{ color: "text.primary", textTransform: "capitalize" }}
+              >
+                {!user ? "user" : `${user.firstName} ${user.lastName}`}
               </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                {account.role}
-              </Typography>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary" }}
+              ></Typography>
             </Box>
           </AccountStyle>
         </Link>

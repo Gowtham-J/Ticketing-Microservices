@@ -44,7 +44,7 @@ const MENU_OPTIONS = [
 
 // ----------------------------------------------------------------------
 
-export default function AccountPopover() {
+export default function AccountPopover({ user }) {
   const navigate = useNavigate();
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
@@ -93,11 +93,15 @@ export default function AccountPopover() {
         sx={{ width: 220 }}
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
-          <Typography variant="subtitle1" noWrap>
-            {account.displayName}
+          <Typography
+            variant="subtitle1"
+            noWrap
+            sx={{ textTransform: "capitalize" }}
+          >
+            {!user ? "user" : `${user.firstName} ${user.lastName}`}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }} noWrap>
-            {account.email}
+            {!user ? "email" : `${user.email}`}
           </Typography>
         </Box>
 
