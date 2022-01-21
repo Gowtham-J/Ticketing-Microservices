@@ -1,17 +1,11 @@
 import { filter } from "lodash";
-import { Icon } from "@iconify/react";
 import { sentenceCase } from "change-case";
 import { useState } from "react";
-import plusFill from "@iconify/icons-eva/plus-fill";
-import { Link as RouterLink } from "react-router-dom";
 // material
 import {
   Card,
   Table,
   Stack,
-  Avatar,
-  Button,
-  Checkbox,
   TableRow,
   TableBody,
   TableCell,
@@ -25,14 +19,12 @@ import axios from "axios";
 import Page from "../components/Page";
 import Label from "../components/Label";
 import Scrollbar from "../components/Scrollbar";
-import SearchNotFound from "../components/SearchNotFound";
 import {
   UserListHead,
   UserListToolbar,
   UserMoreMenu,
 } from "../components/_dashboard/orders";
 //
-import USERLIST from "../_mocks_/user";
 
 // ----------------------------------------------------------------------
 
@@ -81,7 +73,6 @@ function applySortFilter(array, comparator, query) {
 export default function Orders() {
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState("asc");
-  const [selected, setSelected] = useState([]);
   const [orderBy, setOrderBy] = useState("name");
   const [filterName, setFilterName] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -96,37 +87,10 @@ export default function Orders() {
   const handleOrdersReq = async () => {
     const result = await axios.get("/api/orders");
     setOrderList(result.data);
-    console.log(result);
+    // console.log(result);
   };
 
   handleOrdersReq();
-
-  const handleSelectAllClick = (event) => {
-    if (event.target.checked) {
-      const newSelecteds = USERLIST.map((n) => n.name);
-      setSelected(newSelecteds);
-      return;
-    }
-    setSelected([]);
-  };
-
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      );
-    }
-    setSelected(newSelected);
-  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -142,15 +106,13 @@ export default function Orders() {
   };
 
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - USERLIST.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - orderList.length) : 0;
 
-  const filteredUsers = applySortFilter(
-    USERLIST,
+  const filteredOrders = applySortFilter(
+    orderList,
     getComparator(order, orderBy),
     filterName
   );
-
-  const isUserNotFound = filteredUsers.length === 0;
 
   return (
     <Page title="Orders | Minimal-UI">
@@ -164,19 +126,10 @@ export default function Orders() {
           <Typography variant="h4" gutterBottom>
             My order logs
           </Typography>
-          {/* <Button
-            variant="contained"
-            component={RouterLink}
-            to="#"
-            startIcon={<Icon icon={plusFill} />}
-          >
-            New User
-          </Button> */}
         </Stack>
 
         <Card>
           <UserListToolbar
-            numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}
           />
@@ -191,117 +144,36 @@ export default function Orders() {
                   onRequestSort={handleRequestSort}
                 />
                 <TableBody>
-                  {orderList.map((row) => {
-                    return (
-                      <TableRow
-                        hover
-                        key={row.id}
-                        // tabIndex={-1}
-                        // role="checkbox"
-                        //   selected={isItemSelected}
-                        //   aria-checked={isItemSelected}
-                      >
-                        {/* <TableCell padding="checkbox">
-                            <Checkbox
-                              checked={isItemSelected}
-                              onChange={(event) => handleClick(event, name)}
-                            />
-                          </TableCell> */}
-                        {/* <TableCell padding="checkbox"> */}
-                        {/* <Checkbox
-                              checked={isItemSelected}
-                              onChange={(event) => handleClick(event, name)}
-                            /> */}
-                        {/* </TableCell> */}
-                        <TableCell component="th" scope="row" padding="none">
-                          <Stack
-                            direction="row"
-                            alignItems="center"
-                            spacing={2}
-                            sx={{ padding: "0 15px" }}
-                          >
-                            #{row.id}
-                            {/* <Avatar alt={name} src={avatarUrl} /> */}
-                            <Typography variant="subtitle2" noWrap></Typography>
-                          </Stack>
-                        </TableCell>
-                        <TableCell align="left">{row.ticket.title}</TableCell>
-                        <TableCell align="left">{row.ticket.price}</TableCell>
-                        {/* <TableCell align="left">
-                            {isVerified ? "Yes" : "No"}
-                          </TableCell> */}
-                        <TableCell align="left">
-                          <Label
-                            variant="ghost"
-                            color={
-                              (row.status === "cancelled" && "error") ||
-                              "success"
-                            }
-                          >
-                            {sentenceCase(row.status)}
-                          </Label>
-                        </TableCell>
-
-                        <TableCell align="right">
-                          <UserMoreMenu />
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
-                  {/* {filteredUsers
+                  {filteredOrders
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => {
-                      const {
-                        id,
-                        name,
-                        role,
-                        status,
-                        company,
-                        avatarUrl,
-                        isVerified,
-                      } = row;
-                      const isItemSelected = selected.indexOf(name) !== -1;
-
                       return (
-                        <TableRow
-                          hover
-                          key={id}
-                          tabIndex={-1}
-                          role="checkbox"
-                          selected={isItemSelected}
-                          aria-checked={isItemSelected}
-                        >
-                          {/* <TableCell padding="checkbox">
-                            <Checkbox
-                              checked={isItemSelected}
-                              onChange={(event) => handleClick(event, name)}
-                            />
-                          </TableCell>
+                        <TableRow hover key={row.id}>
                           <TableCell component="th" scope="row" padding="none">
                             <Stack
                               direction="row"
                               alignItems="center"
                               spacing={2}
+                              sx={{ padding: "0 15px" }}
                             >
-                              <Avatar alt={name} src={avatarUrl} />
-                              <Typography variant="subtitle2" noWrap>
-                                {name}
-                              </Typography>
+                              #{row.id}
+                              <Typography
+                                variant="subtitle2"
+                                noWrap
+                              ></Typography>
                             </Stack>
                           </TableCell>
-                          <TableCell align="left">{company}</TableCell>
-                          <TableCell align="left">{role}</TableCell>
-                          <TableCell align="left">
-                            {isVerified ? "Yes" : "No"}
-                          </TableCell>
+                          <TableCell align="left">{row.ticket.title}</TableCell>
+                          <TableCell align="left">{row.ticket.price}</TableCell>
                           <TableCell align="left">
                             <Label
                               variant="ghost"
                               color={
-                                (status === "banned" && "error") || "success"
+                                (row.status === "cancelled" && "error") ||
+                                "success"
                               }
                             >
-                              {sentenceCase(status)}
+                              {sentenceCase(row.status)}
                             </Label>
                           </TableCell>
 
@@ -310,22 +182,14 @@ export default function Orders() {
                           </TableCell>
                         </TableRow>
                       );
-                    })} */}
+                    })}
+
                   {emptyRows > 0 && (
                     <TableRow style={{ height: 53 * emptyRows }}>
                       <TableCell colSpan={6} />
                     </TableRow>
                   )}
                 </TableBody>
-                {/* {isUserNotFound && (
-                  <TableBody>
-                    <TableRow>
-                      <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
-                        <SearchNotFound searchQuery={filterName} />
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                )} */}
               </Table>
             </TableContainer>
           </Scrollbar>

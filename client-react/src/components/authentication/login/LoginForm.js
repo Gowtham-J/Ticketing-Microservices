@@ -21,7 +21,8 @@ import axios from "axios";
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
-  const [result, setResult] = useState("");
+  // const [result, setResult] = useState("");
+  // const [user, setUser] = useState({});
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
@@ -40,31 +41,41 @@ export default function LoginForm() {
       remember: true,
     },
     validationSchema: LoginSchema,
-    onSubmit: () => {
+    onSubmit: async () => {
       const config = { headers: { "Content-Type": "application/json" } };
       const data = JSON.stringify({
         email: values.email,
         password: values.password,
       });
       // console.log(data);
+      try {
+        const response = await axios.post("/api/users/signin", data, config);
+        console.log("response", response);
+        // setUser(response.data);
+        navigate("/dashboard/app", { replace: true, state: response.data });
+      } catch (error) {}
 
-      axios
-        .post("/api/users/signin", data, config)
-        .then((res) => {
-          console.log("result", res);
-          setResult(res.data);
-          setError("");
+      // axios
+      //   .post("/api/users/signin", data, config)
+      //   .then((res) => {
+      //     console.log("result", res);
+      //     setResult(res);
+      //     setError("");
+      //     setUser(res.data);
+      //     console.log("login page result", result);
+      //     console.log("login page", user);
 
-          navigate("/dashboard", { replace: true });
-        })
-        .catch((err) => {
-          // console.log("error", err.response.data.errors[0].message);
-          setError(err.response.data.errors[0].message);
-          setResult("");
-          formik.setSubmitting(false);
-        });
+      //     navigate("/dashboard/app", { replace: true, state: user });
+      //   })
+      //   .catch((err) => {
+      //     // console.log("error", err.response.data.errors[0].message);
+      //     setError(err.response.data.errors[0].message);
+      //     setResult("");
+      //     formik.setSubmitting(false);
+      //   });
     },
   });
+  // console.log("user", user);
 
   const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } =
     formik;
