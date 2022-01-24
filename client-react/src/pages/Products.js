@@ -54,7 +54,7 @@ export default function EcommerceShop() {
       .get("/api/tickets")
       .then((res) => {
         // console.log(res.request.response);
-        console.log("currentuseer", res.currentUser);
+        // console.log("currentuseer", res.currentUser);
         setProducts(res.data);
       })
       .catch((err) => {

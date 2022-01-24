@@ -37,7 +37,7 @@ export default function BasicModal({ product }) {
 
   const handlePurchase = () => {
     navigate("/dashboard/products/orderPlace", { state: product });
-    console.log("purchase pending");
+    // console.log("purchase pending");
   };
 
   return (
