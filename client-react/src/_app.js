@@ -13,31 +13,12 @@ import BuildClient from "./api/build-client";
 // ----------------------------------------------------------------------
 
 const App = () => {
-  const [cookies, setCookie] = useCookies(["1P_JAR"]);
-  // var session = '<%= Session["VALUE"] %>';
-  const value = document.cookie;
-  console.log("cookie", value);
-
-  // const [user, setUser] = useState();
-  // async function fetchData() {
-  //   const response = await axios.get("/api/users/currentuser");
-  //   setUser(response.data.currentUser);
-  //   console.log("gelleo", response.data.currentUser);
-  // }
-
-  // useEffect(() => {
-  //   fetchData();
-  //   console.log("ghjsakas", user);
-  // }, []);
-
   return (
     <>
       <ThemeConfig>
         <ScrollToTop />
         <GlobalStyles />
         <BaseOptionChartStyle />
-        {/* <Component {...pageProps} currentUser={currentUser} /> */}
-        {/* <Router user={user} /> */}
         <Router />
       </ThemeConfig>
     </>

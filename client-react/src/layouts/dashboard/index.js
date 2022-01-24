@@ -7,6 +7,7 @@ import DashboardNavbar from "./DashboardNavbar";
 import DashboardSidebar from "./DashboardSidebar";
 import { useEffect } from "react";
 import axios from "axios";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 // ----------------------------------------------------------------------
 
@@ -35,15 +36,34 @@ const MainStyle = styled("div")(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function DashboardLayout() {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState();
 
-  async function fetchData() {
-    const response = await axios.get("/api/users/currentuser");
-    setUser(response.data.currentUser);
-  }
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("/api/users/currentuser");
+      // console.log(response.data.currentUser);
+      if (response.data.currentUser === null) {
+        return true;
+      }
+      setUser(response.data.currentUser);
+      return false;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // console.log("Dashboard page", user);
   useEffect(() => {
-    fetchData();
+    async function run() {
+      const fetch = await fetchData();
+      if (fetch === true) {
+        navigate("/login");
+      }
+    }
+
+    run();
   }, []);
 
   return (
