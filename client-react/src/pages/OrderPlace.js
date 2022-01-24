@@ -13,7 +13,6 @@ export default function OrderPlace() {
   const [error, setError] = useState("");
   const { state: product } = useLocation();
   const navigate = useNavigate();
-  console.log("we are passing through page", product);
   let finalOrder = {};
   const handlePlaceOrder = () => {
     const config = { headers: { "Content-Type": "application/json" } };
@@ -23,7 +22,7 @@ export default function OrderPlace() {
     axios
       .post("/api/orders", data, config)
       .then((res) => {
-        console.log("result of order", res.data);
+        // console.log("result of order", res.data);
         finalOrder = res.data;
         navigate("/dashboard/products/payment", {
           replace: true,
