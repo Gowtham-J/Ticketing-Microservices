@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const BuildClient = ({ req }) => {
-  console.log("hello", typeof window);
   if (typeof window === "undefined") {
     // We are on the server
     // baseURL: "http://www.ticketing-microservice-app.xyz",

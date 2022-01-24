@@ -22,7 +22,6 @@ export default function OrderPlace() {
     axios
       .post("/api/orders", data, config)
       .then((res) => {
-        // console.log("result of order", res.data);
         finalOrder = res.data;
         navigate("/dashboard/products/payment", {
           replace: true,

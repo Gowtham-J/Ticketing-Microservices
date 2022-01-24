@@ -52,19 +52,16 @@ export default function TicketForm() {
         email: values.email,
         password: values.password,
       });
-      // console.log(data);
 
       axios
         .post("/api/users/signin", data, config)
         .then((res) => {
-          console.log("result", res);
           setResult(res.data);
           setError("");
 
           navigate("/dashboard", { replace: true });
         })
         .catch((err) => {
-          // console.log("error", err.response.data.errors[0].message);
           setError(err.response.data.errors[0].message);
           setResult("");
           formik.setSubmitting(false);
@@ -83,8 +80,6 @@ export default function TicketForm() {
     <FormikProvider value={formik}>
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Stack spacing={3}>
-          {/* <Grid container spacing={3}> */}
-          {/* <Grid item xs={12} sm={12} md={12}> */}
           <TextField
             fullWidth
             sx={{ width: "100%" }}
@@ -96,8 +91,6 @@ export default function TicketForm() {
             helperText={touched.email && errors.email}
           />
           {error ? <div style={{ color: "red" }}>{error}</div> : null}
-          {/* </Grid> */}
-          {/* </Grid> */}
 
           <TextField
             fullWidth
@@ -124,7 +117,6 @@ export default function TicketForm() {
             <OutlinedInput
               id="outlined-adornment-amount"
               value={values.amount}
-              //   onChange={handleChange("amount")}
               startAdornment={
                 <InputAdornment position="start">$</InputAdornment>
               }

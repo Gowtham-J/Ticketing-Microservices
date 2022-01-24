@@ -87,7 +87,6 @@ export default function Orders() {
   const handleOrdersReq = async () => {
     const result = await axios.get("/api/orders");
     setOrderList(result.data);
-    // console.log(result);
   };
 
   handleOrdersReq();

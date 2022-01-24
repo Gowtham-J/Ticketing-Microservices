@@ -50,13 +50,20 @@ export default function LoginForm() {
         navigate("/dashboard/app", { replace: true, state: response.data });
       } catch (err) {
         setError(err.response.data.errors[0].message);
-        // console.log(err.response.data.errors[0].message);
+        setErrors(err.response.data.errors[0].message);
       }
     },
   });
 
-  const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } =
-    formik;
+  const {
+    errors,
+    setErrors,
+    touched,
+    values,
+    isSubmitting,
+    handleSubmit,
+    getFieldProps,
+  } = formik;
 
   const handleShowPassword = () => {
     setShowPassword((show) => !show);

@@ -17,7 +17,6 @@ export default function DashboardApp() {
   const fetchData = async () => {
     try {
       const response = await axios.get("/api/users/currentuser");
-      // console.log(response.data.currentUser);
       if (response.data.currentUser === null) {
         return true;
       }
@@ -28,7 +27,6 @@ export default function DashboardApp() {
     }
   };
 
-  // console.log("Dashboard page", user);
   useEffect(() => {
     async function run() {
       const fetch = await fetchData();

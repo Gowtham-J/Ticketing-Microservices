@@ -14,14 +14,6 @@ export default function Tickets() {
           <Typography variant="h4">Hi, Let's publish an event</Typography>
         </Box>
         <Grid container spacing={3}>
-          {/* <Grid item xs={12} sm={6} md={3}>
-            <AppWeeklySales />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <AppNewUsers />
-          </Grid>
-  */}
-
           <TicketForm />
         </Grid>
       </Container>

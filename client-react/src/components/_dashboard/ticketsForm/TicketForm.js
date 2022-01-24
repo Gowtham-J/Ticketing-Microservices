@@ -58,19 +58,16 @@ export default function RegisterForm() {
         country: values.country,
         image: values.image,
       });
-      console.log(data);
 
       axios
         .post("/api/tickets", data, config)
         .then((res) => {
-          // console.log("result", res);
           setResult(res.data);
           setError("");
 
           navigate("/dashboard/tickets/regards", { replace: true });
         })
         .catch((err) => {
-          // console.log("error", err.response.data.errors[0].message);
           setError(err.response.data.errors[0].message);
           setResult("");
           formik.setSubmitting(false);

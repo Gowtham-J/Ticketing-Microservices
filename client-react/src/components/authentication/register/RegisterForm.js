@@ -54,19 +54,16 @@ export default function RegisterForm() {
         lastName: values.lastName,
         number: values.contact,
       });
-      // console.log(data);
 
       axios
         .post("/api/users/signup", data, config)
         .then((res) => {
-          // console.log("result", res);
           setResult(res.data);
           setError("");
 
           navigate("/login", { replace: true });
         })
         .catch((err) => {
-          // console.log("error", err.response.data.errors[0].message);
           setError(err.response.data.errors[0].message);
           setResult("");
           formik.setSubmitting(false);

@@ -52,7 +52,6 @@ export default function DashboardSidebar({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
-  // console.log("user123", user);
   const renderContent = (
     <Scrollbar
       sx={{
